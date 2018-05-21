@@ -1,0 +1,8 @@
+.center-block
+{
+	width: 50%;
+	margin: auto;
+	background-color: #F8F9FA;
+	border-radius: 3px;
+	border: 1px solid #CED4DA;
+}

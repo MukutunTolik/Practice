@@ -1,0 +1,33 @@
+<div *ngIf="transactions !== undefined && transactions.length"><div class="row m-2">
+  <select class="col-3 form-control" (change)="onFilterChanged($event.target.value)">
+    <option value="all" selected>Filter by category</option>
+    <option *ngFor="let category of categories" value="{{category._id}}">{{category.name}}</option>
+  </select>
+  </div>
+  <table class="table table-bordered table-hover m-2">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Категорія</th>
+        <th scope="col">Тип</th>
+        <th scope="col">Сума</th>
+        <th scope="col">Дата</th>
+        <th scope="col">Опис</th>
+        <th scope="col">Дії</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor=" let transaction of transactions; let i = index ">
+        <th scope="row">{{i+1}}</th>
+        <td>{{getCategoryName(transaction.category)}}</td>
+        <td>{{transaction.type}}</td>
+        <td>{{transaction.total}}</td>
+        <td>{{transaction.date_created | date}}</td>
+        <td>{{transaction.description}}</td>
+        <td class="text-center"><button routerLink="/transaction/view/{{transaction._id}}" type="button" class="btn btn-sm btn-primary mr-2">Ред.</button><button (click)="removeTransaction(transaction._id)" type="button" class="btn btn-sm btn-danger">Видалити</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="!transactions.length" class="m-2 alert alert-warning">Немає транзакцій, створіть їх :)</div>
+<button class="m-2 btn btn-primary" routerLink="/transaction/add">Додати транзакцію</button>
